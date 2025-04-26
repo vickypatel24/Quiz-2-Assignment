@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employee Salary Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h2>Employee Salary Distribution</h2>
+    <canvas id="salaryChart" width="400" height="200"></canvas>
+
+    <script>
+      async function loadData() {
+        const response = await fetch("/api/employees/");
+        const data = await response.json();
+        const salaries = data.map((emp) => emp.salary);
+        const names = data.map((emp) => emp.first_name + " " + emp.last_name);
+
+        const ctx = document.getElementById("salaryChart").getContext("2d");
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: names,
+            datasets: [
+              {
+                label: "Salary ($)",
+                data: salaries,
+                backgroundColor: "rgba(54, 162, 235, 0.6)",
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      }
+      loadData();
+    </script>
+  </body>
+</html>
