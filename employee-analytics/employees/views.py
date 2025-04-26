@@ -5,12 +5,12 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.db.models import Avg, Max, Min, Count
 from django.shortcuts import render
-from django_filters.rest_framework import DjangoFilterBackend
+# from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from django.db.models import Avg, Max, Min, Count
 from rest_framework.response import Response
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+# from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 import logging
 from django.http import JsonResponse
 import csv
@@ -24,18 +24,18 @@ def handler404(request, exception):
     return render(request, '404.html', status=404)
 
 
-class MyTokenObtainPairView(TokenObtainPairView):
-    pass
+# class MyTokenObtainPairView(TokenObtainPairView):
+#     pass
 
 
-class MyTokenRefreshView(TokenRefreshView):
-    pass
+# class MyTokenRefreshView(TokenRefreshView):
+#     pass
 
 
 class EmployeeListAPIView(generics.ListAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
-    filter_backends = [DjangoFilterBackend]
+    # filter_backends = [DjangoFilterBackend]
 
     filterset_fields = ['department', 'position']
     # permission_classes = [IsAuthenticated]
